@@ -2,7 +2,6 @@
 Application configuration
 """
 
-import os
 from pydantic import BaseSettings
 
 
@@ -10,7 +9,6 @@ class GlobalSettings(BaseSettings):
     """Global Settings"""
 
     FLASK_APP: str = "app.py"
-    URL_PREFIX: str = "/api/v1"
 
 
 class DevConfig(GlobalSettings):
