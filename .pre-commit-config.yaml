@@ -1,0 +1,49 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+    -   id: check-yaml
+    -   id: check-toml
+    -   id: check-json
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+-   repo: https://github.com/myint/autoflake
+    rev: v1.4
+    hooks:
+    -   id: autoflake
+        args:
+          - -r  # recursive search
+          - --in-place  # replace in place
+          - --remove-unused-variables  # remove unused variables
+          - --remove-all-unused-imports  # remove unused imports
+-   repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+    -   id: black
+        language_version: python3.10
+-   repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+    -   id: isort
+        name: isort (python)
+        additional_dependencies:
+        -   toml
+        args:
+        -   --filter-files
+        -   --profile=black
+        files: \.py$
+- repo: https://github.com/pycqa/pylint
+  rev: v2.15.9
+  hooks:
+    - id: pylint
+      name: pylint
+      entry: pylint
+      language: system
+      types: [python]
+      args: ["-rn", "-sn"]
+- repo: https://github.com/compilerla/conventional-pre-commit
+  rev: v2.1.1
+  hooks:
+    - id: conventional-pre-commit
+      stages: [commit-msg]
+      args: [fix, feat, docs, style, refactor, perf, test, build, ci, chore, revert, merge]
