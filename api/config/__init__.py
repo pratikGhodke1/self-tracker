@@ -1,6 +1,8 @@
 """
 Application configuration
 """
+# pylint: disable=R0903
+
 
 from pydantic import BaseSettings
 

@@ -2,6 +2,7 @@
 
 import json
 from datetime import date, datetime
+from enum import Enum
 
 
 # Update JSON Encoder
@@ -15,6 +16,11 @@ class CustomJSONEncoder(json.JSONEncoder):
             # Update date formatting
             if isinstance(obj, (date, datetime)):
                 return obj.isoformat()
+
+            # Get Enum value
+            if isinstance(obj, (Enum,)):
+                return obj.value
+
             iterable = iter(obj)
         except TypeError:
             pass

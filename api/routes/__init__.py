@@ -3,6 +3,7 @@ Register routes to the flask app
 """
 from flask import Flask
 from api.routes.status import application_status_blueprint
+from api.routes.user import user_blueprint
 
 
 def init_routes(app: Flask) -> None:
@@ -13,3 +14,4 @@ def init_routes(app: Flask) -> None:
     """
 
     app.register_blueprint(application_status_blueprint)
+    app.register_blueprint(user_blueprint)

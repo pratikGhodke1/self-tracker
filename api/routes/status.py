@@ -15,4 +15,6 @@ class ApplicationHealth(Resource):
 
 application_status_blueprint = create_blueprint("application_status", __name__)
 application_status_api = create_restful_api(application_status_blueprint)
+
+# Register routes
 application_status_api.add_resource(ApplicationHealth, "/health")
