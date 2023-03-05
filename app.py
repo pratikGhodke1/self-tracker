@@ -10,7 +10,7 @@ from api.routes import init_routes
 from api.util.utils import CustomJSONEncoder
 
 
-def create_app(environment: str = "prod") -> Flask:
+def create_app(environment: str = "dev") -> Flask:
     """Initialize and setup flask app
 
     Returns:

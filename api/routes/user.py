@@ -2,6 +2,7 @@
 
 from flask import make_response, request
 from flask_restful import Resource
+from flask_pydantic import validate
 from sqlalchemy import or_
 from sqlalchemy.exc import IntegrityError
 
@@ -10,6 +11,7 @@ from api.model import db
 from api.model.user import User
 from api.routes.routes_utils import create_blueprint, create_restful_api
 from api.schema.enums import RequestState
+from api.schema.validation import UserPostRequest, UserPutRequest
 from api.util.logger import init_logger
 
 logger = init_logger(__name__, "User", request)
@@ -18,11 +20,12 @@ logger = init_logger(__name__, "User", request)
 class UsersAPI(Resource):
     """API to add and list users"""
 
-    def post(self):
+    @validate()
+    def post(self, body: UserPostRequest):
         """Create a new user"""
         logger.info("Received request to create a new user")
-        email = request.json.get("email", "")
-        mobile = request.json.get("mobile", "")
+        email = body.email
+        mobile = body.mobile
 
         user = User.query.filter(
             or_(User.email == email, User.mobile == mobile)
@@ -32,7 +35,7 @@ class UsersAPI(Resource):
             logger.error(f"User with email={email} OR mobile={mobile} already exists")
             raise UserAlreadyExists()
 
-        user = User(**request.json)
+        user = User(**body)
         db.session.add(user)
         db.session.commit()
 
@@ -66,9 +69,11 @@ class UserAPI(Resource):
         logger.info(f"Returning user: {user_id}")
         return make_response(user.to_json(), 200)
 
-    def put(self, user_id: int):
+    @validate()
+    def put(self, user_id: int, body: UserPutRequest):
         """Get user by id"""
         logger.info(f"Received request to update user: {user_id}")
+
         try:
             user = User.query.filter_by(id=user_id).first()
 
@@ -76,7 +81,7 @@ class UserAPI(Resource):
                 logger.info(f"User: {user_id} does not exists")
                 raise UserNotExists(user_id)
 
-            for field, value in request.json.items():
+            for field, value in body.dict(exclude_unset=True).items():
                 setattr(user, field, value)
 
             user.updated_at = db.func.now()
