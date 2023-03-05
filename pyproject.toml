@@ -12,6 +12,7 @@ flask = "^2.2.3"
 pydantic = "^1.10.5"
 flask-sqlalchemy = "^3.0.3"
 flask-restful = "^0.3.9"
+flask-cors = "^3.0.10"
 
 
 [tool.poetry.group.dev.dependencies]

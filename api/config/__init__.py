@@ -9,6 +9,7 @@ class GlobalSettings(BaseSettings):
     """Global Settings"""
 
     FLASK_APP: str = "app.py"
+    SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
 
 
 class DevConfig(GlobalSettings):
@@ -17,6 +18,7 @@ class DevConfig(GlobalSettings):
     ENV: str = "development"
     DEBUG: bool = True
     SERVER_NAME: str = "localhost:5000"
+    SQLALCHEMY_DATABASE_URI: str = "sqlite:///dev.sqlite3"
 
 
 class TestingConfig(DevConfig):
@@ -25,6 +27,7 @@ class TestingConfig(DevConfig):
     ENV: str = "testing"
     TESTING: bool = True
     SERVER_NAME: str = "localhost:5001"
+    SQLALCHEMY_DATABASE_URI: str = "sqlite:///test.sqlite3"
 
 
 class ProdConfig(GlobalSettings):
@@ -33,6 +36,7 @@ class ProdConfig(GlobalSettings):
     ENV: str = "production"
     DEBUG: bool = False
     SERVER_NAME: str = "localhost:5002"
+    SQLALCHEMY_DATABASE_URI: str = "sqlite:///prod.sqlite3"
 
 
 def get_config(env_name: str) -> dict:
