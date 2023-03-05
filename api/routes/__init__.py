@@ -2,6 +2,7 @@
 Register routes to the flask app
 """
 from flask import Flask
+
 from api.routes.status import application_status_blueprint
 from api.routes.user import user_blueprint
 

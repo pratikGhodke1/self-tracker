@@ -5,8 +5,11 @@ __pycache__
 # Editor config files
 .vscode
 
-# Testing Files
+# Testing files
 htmlcov/
 
 # DB files
 instance/
+
+# Log files
+*.log
