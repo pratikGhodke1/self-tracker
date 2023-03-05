@@ -1,6 +1,7 @@
 """Exception response generator"""
 
 from typing import Optional
+
 from api.schema.enums import RequestState
 
 # --------------------------- Custom Error Classes --------------------------- #
