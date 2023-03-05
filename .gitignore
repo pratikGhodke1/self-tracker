@@ -7,3 +7,6 @@ __pycache__
 
 # Testing Files
 htmlcov/
+
+# DB files
+instance/
