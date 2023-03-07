@@ -6,6 +6,7 @@ This is application which tracks all your personal things ;)
 - Flask
 - Pydantic
 - Sqlite3 (temp)
+- gunicorn (WSGI server)
 
 ## Installation & Setup
 This application uses poetry to manage all the dependencies, virtual environment and running application.
