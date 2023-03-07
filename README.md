@@ -7,9 +7,10 @@ This is application which tracks all your personal things ;)
 - Pydantic
 - Sqlite3 (temp)
 
-# Installation Steps
+## Installation & Setup
+This application uses poetry to manage all the dependencies, virtual environment and running application.
 
-### Normal Python Installtion
+#### Application Setup
 1. Verify python version
     > python -V # python3.10
 
@@ -18,6 +19,14 @@ This is application which tracks all your personal things ;)
 
 3. Install dependencies using poetry
     > poetry install
+
+#### Running Development Server
+Simply run python command to start the server. By default, it will run in `development` mode.
+> python app.py
+
+#### Running Production Server using WSGI
+Use `gunicorn` to run the `wsgi.py` file.
+> gunicorn -w 4 --bind 0.0.0.0:5002 "wsgi:application"
 
 # Endpoints
 Below are the endpoints, expected response body and params and returned response. Currently using version 1 of api with API prefix as `/api/v1`
