@@ -1,7 +1,8 @@
 """Error Handler Service"""
 
 from flask import Flask, request
-from api import exceptions
+
+from api.exceptions import auth, user
 from api.constants import ERROR_HANDLER
 from api.schema.enums import RequestState
 from api.util.logger import init_logger
@@ -37,5 +38,7 @@ def _error_response(error: Exception) -> tuple[dict, int]:
 
 def register_error_handlers(app: Flask):
     """register error handlers to flask application"""
-    app.register_error_handler(exceptions.user.UserAlreadyExists, _error_response)
-    app.register_error_handler(exceptions.user.UserNotExists, _error_response)
+    app.register_error_handler(user.UserAlreadyExists, _error_response)
+    app.register_error_handler(user.UserNotExists, _error_response)
+    app.register_error_handler(auth.BadAuthHeader, _error_response)
+    app.register_error_handler(auth.UnauthorizedError, _error_response)

@@ -1,5 +1,6 @@
 """User Exceptions"""
 
+
 class UserAlreadyExists(Exception):
     """User already exists exception"""
 
