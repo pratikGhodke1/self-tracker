@@ -1,13 +1,16 @@
 """Exception response generator"""
 
 from typing import Optional
+
 from api.schema.enums import RequestState
 
 # ---------------------------------------------------------------------------- #
 
 
 def generate_response(
-    status: RequestState, message: str, custom_fields: Optional[dict] = None
+    status: RequestState = RequestState.SUCCESS,
+    message: str = "",
+    custom_fields: Optional[dict] = None,
 ) -> dict:
     """Generate error response body
 
@@ -25,5 +28,9 @@ def generate_response(
     Returns:
         dict: Error response body
     """
+    response = {"status": status}
+    if message:
+        response["message"] = message
+
     custom_fields = custom_fields or {}
-    return dict({"status": status, "message": message}, **custom_fields)
+    return dict(response, **custom_fields)

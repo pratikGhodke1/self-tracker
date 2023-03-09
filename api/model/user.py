@@ -32,14 +32,7 @@ class User(db.Model):
             self.password_hash = generate_password_hash(password)
 
     def verify_password(self, password: str) -> bool:
-        """Verify user password
-
-        Args:
-            password (str): User password
-
-        Returns:
-            bool: Password verified?
-        """
+        """Verify user password"""
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self) -> str:
