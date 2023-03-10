@@ -11,7 +11,6 @@ from api.service import user
 from api.service.handlers import authentication
 from api.util.logger import init_logger
 
-
 logger = init_logger(__name__, USER_SERVICE, request)
 
 

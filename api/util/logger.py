@@ -5,9 +5,10 @@ Logger module for logging
 # Imports
 import logging
 
-from api.constants import LOG_FILE_PATH
+from api.config import SETTINGS
 
 
+# pylint: disable=R0903
 class AppFilter(logging.Filter):
     """Logger filter - add "app_name" field in log string"""
 
@@ -51,7 +52,7 @@ def init_logger(logger_name, app_name, request="") -> logging.Logger:
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(formatter)
 
-    file_handler = logging.FileHandler(LOG_FILE_PATH)
+    file_handler = logging.FileHandler(SETTINGS.LOG_FILE_PATH)
     file_handler.setFormatter(formatter)
 
     logger.addHandler(stream_handler)

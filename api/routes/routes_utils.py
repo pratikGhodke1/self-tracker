@@ -5,12 +5,12 @@ from datetime import datetime
 from flask import Blueprint
 from flask_restful import Api
 
-from api.constants import URL_PREFIX
+from api.config import SETTINGS
 
 
 def create_blueprint(name: str, import_name: str) -> Blueprint:
     """Create a blueprint for a route"""
-    return Blueprint(name, import_name, url_prefix=URL_PREFIX)
+    return Blueprint(name, import_name, url_prefix=SETTINGS.URL_PREFIX)
 
 
 def create_restful_api(bluprint: Blueprint) -> Api:

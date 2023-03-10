@@ -2,8 +2,8 @@
 
 from flask import Flask, request
 
-from api.exceptions import auth, user
 from api.constants import ERROR_HANDLER
+from api.exceptions import auth, user
 from api.schema.enums import RequestState
 from api.util.logger import init_logger
 

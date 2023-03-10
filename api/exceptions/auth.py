@@ -9,6 +9,7 @@ class BadAuthHeader(Exception):
         self.message = "Insufficient or missing credentials"
         super().__init__(self.message)
 
+
 class UnauthorizedError(Exception):
     """User Unauthorized"""
 

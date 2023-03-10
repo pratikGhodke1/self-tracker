@@ -3,7 +3,11 @@ Application configuration
 """
 # pylint: disable=R0903
 
+import os
+
 from pydantic import BaseSettings
+
+APPLICATION_ENV = os.environ.get("ENV", "development")
 
 
 class GlobalSettings(BaseSettings):
@@ -43,18 +47,8 @@ class ProdConfig(GlobalSettings):
     SQLALCHEMY_DATABASE_URI: str = "sqlite:///prod.sqlite3"
 
 
-def get_config(env_name: str) -> dict:
-    """Get configuration by environment name
-
-    Args:
-        env_name (str): Environment name
-
-    Returns:
-        dict: Configuration dictionary
-    """
-
-    return {
-        "dev": DevConfig().dict(),
-        "test": TestingConfig().dict(),
-        "prod": ProdConfig().dict(),
-    }.get(env_name)
+SETTINGS = {
+    "development": DevConfig(),
+    "testing": TestingConfig(),
+    "production": ProdConfig(),
+}.get(APPLICATION_ENV)

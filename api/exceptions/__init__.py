@@ -4,8 +4,6 @@ from typing import Optional
 
 from api.schema.enums import RequestState
 
-# ---------------------------------------------------------------------------- #
-
 
 def generate_response(
     status: RequestState = RequestState.SUCCESS,
